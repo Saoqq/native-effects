@@ -48,7 +48,7 @@ android {
 
 publishing {
     publications {
-        release(MavenPublication) {
+        publishToMavenLocal(MavenPublication) {
             groupId = 'ru.vtosters.lite'
             artifactId = 'native-effects'
             version = '1.0'
