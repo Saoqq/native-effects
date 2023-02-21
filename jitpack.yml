@@ -1,5 +1,17 @@
 jdk:
   - openjdk11
+
+env:
+  global:
+    - TARGET_VERSION=30
+    - ANDROID_BUILD_TOOLS_VERSION=30.0.2
+    - ANDROID_HOME=~/android-sdk
+
 before_install:
+  - touch $HOME/.android/repositories.cfg
+  - wget "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip" -O commandlinetools.zip
+  - unzip commandlinetools.zip -d $ANDROID_HOME/
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}" --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;34.0.0"
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --uninstall "ndk-bundle" | $ANDROID_HOME/tools/bin/sdkmanager --install "ndk;25.2.9519653"
