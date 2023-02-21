@@ -66,8 +66,8 @@ publishing {
     publications {
         gpr(MavenPublication) {
             groupId 'ru.vtosters.lite'
-            artifactId 'native-effects'
-            version '1.0'
+            artifactId 'native_effects'
+            version System.getenv("SHORT_SHA")
             artifact("$buildDir/outputs/aar/native-effects-release.aar")
         }
     }
