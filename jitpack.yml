@@ -1,6 +1,5 @@
 jdk:
-  - openjdk8
+  - openjdk11
 before_install:
-  - yes | sdkmanager --uninstall "ndk-bundle" | sdkmanager --install "ndk;25.2.9519653"
-  - sdk install java 11.0.2-open
-  - sdk use java 11.0.2-open
+  - yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;34.0.0"
+  - yes | $ANDROID_HOME/tools/bin/sdkmanager --uninstall "ndk-bundle" | $ANDROID_HOME/tools/bin/sdkmanager --install "ndk;25.2.9519653"
