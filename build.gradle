@@ -75,3 +75,4 @@ publishing {
 
 publish.dependsOn('assembleRelease')
 preBuild.dependsOn('cargoBuild')
+publishGprPublicationToGitHubPackagesRepository.dependsOn('bundleReleaseAar')
