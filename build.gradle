@@ -36,7 +36,6 @@ cargo {
 android {
     namespace 'ru.vtosters.native_effects'
     compileSdk 32
-    ndkVersion '25.1.8937393'
 
     defaultConfig {
         minSdk 22
