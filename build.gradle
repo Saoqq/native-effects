@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'org.mozilla.rust-android-gradle:plugin:0.9.3'
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+cargo {
+    profile = 'release'
+    module = './rust-src'
+    libname = 'native_effects'
+    targets = ["arm", "arm64"]
+    prebuiltToolchains = true
+    pythonCommand = "python3"
+}
+
+android {
+    namespace 'ru.vtosters.native_effects'
+    compileSdk 32
+    ndkVersion '25.1.8937393'
+
+    defaultConfig {
+        minSdk 22
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+preBuild.dependsOn('cargoBuild')
+publish.dependsOn('assembleRelease')
