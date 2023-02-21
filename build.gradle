@@ -38,7 +38,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 22
+        minSdkVersion 22
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
@@ -47,11 +47,13 @@ android {
 
 publishing {
     publications {
-        register('jitpack', MavenPublication) {
-            groupId 'ru.vtosters.lite'
-            artifactId 'native-effects'
-            version '1.0'
-            artifact("$buildDir/outputs/aar/native-effects-release.aar")
+        release(MavenPublication) {
+            groupId = 'ru.vtosters.lite'
+            artifactId = 'native-effects'
+            version = '1.0'
+            afterEvaluate {
+                from components.release
+            }
         }
     }
 }
