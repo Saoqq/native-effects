@@ -21,4 +21,4 @@ jobs:
           rustup target add aarch64-linux-android
 
       - uses: gradle/gradle-build-action@v2
-        run: gradle publish
+      - run: gradle publish
