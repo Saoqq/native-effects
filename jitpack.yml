@@ -1,4 +1,6 @@
 jdk:
-  - openjdk11
+  - openjdk8
 before_install:
   - yes | sdkmanager --uninstall "ndk-bundle" | sdkmanager --install "ndk;25.2.9519653"
+  - sdk install java 11.0.2-open
+  - sdk use java 11.0.2-open
