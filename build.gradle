@@ -23,7 +23,9 @@ repositories {
 
 apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
+
+group = 'com.github.Saoqq'
 
 cargo {
     profile = 'release'
@@ -46,18 +48,4 @@ android {
     }
 }
 
-publishing {
-    publications {
-        publishToMavenLocal(MavenPublication) {
-            groupId = 'ru.vtosters.lite'
-            artifactId = 'native-effects'
-            version = '1.0'
-            afterEvaluate {
-                from components.release
-            }
-        }
-    }
-}
-
 preBuild.dependsOn('cargoBuild')
-publish.dependsOn('assembleRelease')
