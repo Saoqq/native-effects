@@ -14,10 +14,21 @@ buildscript {
 
 repositories {
     mavenCentral()
-    mavenLocal()
     google()
     maven {
         url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        name = "GitHubPackages"
+        // TODO: set vt org
+        url = uri("https://maven.pkg.github.com/Saoqq/native-effects")
+        // TODO: try to resolve from ENV first (for CI/manual publish) and only then use hardcoded read-only
+        // github moment: https://github.com/orgs/community/discussions/26634
+        // TODO: set vt org
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
     }
 }
 
@@ -25,7 +36,7 @@ apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
-group = 'com.github.Saoqq'
+group = 'ru.vtosters.lite'
 
 cargo {
     profile = 'release'
@@ -48,16 +59,13 @@ android {
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = "com.github.Saoqq"
-                artifactId = "native-effects"
-                version = "1.0"
-                // Applies the component for the release build variant
-                from components.release
-            }
+publishing {
+    publications {
+        register('gh', MavenPublication) {
+            groupId 'ru.vtosters.lite'
+            artifactId 'native-effects'
+            version '1.0'
+            artifact("$buildDir/outputs/aar/native-effects-release.aar")
         }
     }
 }
