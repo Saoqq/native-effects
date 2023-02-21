@@ -9,4 +9,4 @@ before_install:
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --uninstall "ndk-bundle" | $ANDROID_HOME/tools/bin/sdkmanager --install "ndk;25.2.9519653" --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --uninstall "ndk-bundle" --sdk_root=$ANDROID_HOME | $ANDROID_HOME/tools/bin/sdkmanager --install "ndk;25.2.9519653" --sdk_root=$ANDROID_HOME
