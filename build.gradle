@@ -45,5 +45,16 @@ android {
     }
 }
 
+publishing {
+    publications {
+        register('jitpack', MavenPublication) {
+            groupId 'ru.vtosters.lite'
+            artifactId 'native-effects'
+            version '1.0'
+            artifact("$buildDir/outputs/aar/native-effects-release.aar")
+        }
+    }
+}
+
 preBuild.dependsOn('cargoBuild')
 publish.dependsOn('assembleRelease')
